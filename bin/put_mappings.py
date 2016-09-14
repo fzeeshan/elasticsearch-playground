@@ -11,7 +11,7 @@ import cli
 if __name__ == "__main__":
     parser = cli.make_parser()
     parser.add_argument(
-        "mapping_file", default="review-mapping.json")
+        "-m", "--mapping-file", default="review-mapping.json")
     args = parser.parse_args()
 
     fname = args.mapping_file

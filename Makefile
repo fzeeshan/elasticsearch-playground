@@ -1,25 +1,27 @@
 SOURCE=http://snap.stanford.edu/data/amazon/productGraph/categoryFiles
+ES_HOST := $(shell cat hostname)
+FLAGS=--es-host $(ES_HOST)
 
 all: rebuild parse index
 
 rebuild:
-	./bin/delete-mapping.sh
-	./bin/build_index.sh
-	./bin/put_mappings.py
+	./bin/delete-mapping.sh $(FLAGS)
+	./bin/build_index.sh $(FLAGS)
+	./bin/put_mappings.py $(FLAGS) --mapping-file ./bin/review-mapping.json
 
 parse:
-	python ./bin/streamit.py grocery-and-gourmet-food-5cores.json
-	python ./bin/streamit.py android-apps-5cores.json
-	python ./bin/streamit.py movies-and-tv-5cores.json
-	python ./bin/streamit.py electronics-5cores.json
-	#python ./bin/streamit.py cell-phones-and-accessories-5cores.json
+	python ./bin/streamit.py $(FLAGS) grocery-and-gourmet-food-5cores.json
+	python ./bin/streamit.py $(FLAGS) android-apps-5cores.json
+	python ./bin/streamit.py $(FLAGS) movies-and-tv-5cores.json
+	python ./bin/streamit.py $(FLAGS) electronics-5cores.json
+	#python ./bin/streamit.py $(FLAGS) cell-phones-and-accessories-5cores.json
 
 index:
-	python ./bin/bulk_index.py grocery-and-gourmet-food
-	python ./bin/bulk_index.py android-apps
-	python ./bin/bulk_index.py movies-and-tv
-	python ./bin/bulk_index.py electronics
-	#python ./bin/bulk_index.py cell-phones-and-accessories
+	python ./bin/bulk_index.py $(FLAGS) grocery-and-gourmet-food
+	python ./bin/bulk_index.py $(FLAGS) android-apps
+	python ./bin/bulk_index.py $(FLAGS) movies-and-tv
+	python ./bin/bulk_index.py $(FLAGS) electronics
+	python ./bin/bulk_index.py $(FLAGS) cell-phones-and-accessories
 
 get:
 	wget $(SOURCE)/reviews_Grocery_and_Gourmet_Food_5.json.gz

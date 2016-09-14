@@ -1,0 +1,62 @@
+{
+    "properties": {
+        "category": {
+            "type": "string",
+            "index": "not_analyzed"
+        },
+        "reviewerID": {
+            "type": "string",
+            "index": "not_analyzed"
+        },
+        "asin": {
+            "type": "string",
+            "index": "not_analyzed"
+        },
+        "reviewerName": {
+            "type": "string"
+        },
+        "reviewText": {
+            "type": "string"
+        },
+        "summary": {
+            "type": "string"
+        },
+        "helpful_count": {
+            "type": "integer"
+        },
+        "helpful_total": {
+            "type": "integer"
+        },
+        "overall": {
+            "type": "float"
+        },
+        "unixReviewTime": {
+            "type": "long"
+        },
+        "reviewTime": {
+            "type": "date",
+            "format": "yyyy-mm-dd"
+        },
+        "features": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "price": {
+            "type": "float"
+        },
+        "brand": {
+            "type": "string"
+        },
+        "region": {
+            "type": "string"
+        },
+        "manufacturer": {
+            "type": "string"
+        },
+        "editorialReviews": {
+            "type": "string"
+        }
+    }
+}
